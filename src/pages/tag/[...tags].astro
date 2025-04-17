@@ -1,8 +1,17 @@
 ---
 import { getTagsList } from "@/utils/getArchive";
 import { getCollection } from "astro:content";
+
+// 指示Astro将此路由预渲染为静态HTML
+export const prerender = true;
+
 export async function getStaticPaths(): Promise<any> {
-	const posts = await getCollection("blog");
+	// 使用函数包装异步内容加载，避免顶级await
+	async function getPosts() {
+		return await getCollection("blog");
+	}
+	
+	const posts = await getPosts();
 	let tagList: any = [];
 	posts.forEach(post => (tagList = [...tagList, ...(post.data.tags || [])]));
 	return [...new Set(tagList)].map(tags => ({ params: { tags } }));
