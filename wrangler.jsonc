@@ -1,6 +1,6 @@
 {
   "name": "vh-astro",
-  "compatibility_date": "2025-03-31",
+  "compatibility_date": "2023-11-30",
   "assets": {
     "directory": "./dist"
   },
