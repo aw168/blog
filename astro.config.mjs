@@ -21,7 +21,11 @@ export default defineConfig({
 	site: SITE_INFO.Site,
 	output: 'server',
 	adapter: cloudflare({
-		mode: 'directory'
+		mode: 'directory',
+		// 为Cloudflare环境配置正确的目标
+		platformProxy: {
+			enable: true
+		}
 	}),
 	build: { 
 		assets: 'vh_static',
@@ -57,6 +61,14 @@ export default defineConfig({
 		resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
 		build: {
 			minify: false,
+			// 配置正确的目标环境
+			target: 'es2019',
+		},
+		// 添加Cloudflare构建配置
+		ssr: {
+			noExternal: ['path-to-regexp'],
+			target: 'webworker',
+			external: ['node:*'],
 		}
 	},
 	server: { host: '0.0.0.0' }
