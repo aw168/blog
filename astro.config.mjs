@@ -21,12 +21,7 @@ export default defineConfig({
 	site: SITE_INFO.Site,
 	output: 'server',
 	adapter: cloudflare({
-		mode: 'directory',
-		functionPerRoute: false,
-		routes: {
-			strategy: 'include',
-			include: ['/admin', '/admin/*']
-		}
+		mode: 'directory'
 	}),
 	build: { assets: 'vh_static' },
 	integrations: [swup({
