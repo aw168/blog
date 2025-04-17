@@ -1,7 +1,7 @@
 ---
 import { getDescription, fmtTime } from "@/utils/index";
 import { type CollectionEntry, getCollection } from "astro:content";
-import { render } from "astro:content";
+// 从astro:content导入render是不兼容的，在Astro 2.x中应该从CollectionEntry中获取
 export async function getStaticPaths() {
 	const posts = await getCollection("blog");
 	return posts.map((post: any) => ({ params: { article: post.data.id }, props: post }));
@@ -17,7 +17,8 @@ import SITE_CONFIG from "@/config";
 const { Site, Title, Author, GoogleAds } = SITE_CONFIG;
 // 处理文章内容
 const description = getDescription(post);
-const { Content, remarkPluginFrontmatter } = await render(post);
+// 在Astro 2.x中，render方法是CollectionEntry的一部分
+const { Content, remarkPluginFrontmatter } = await post.render();
 // 文章字数和阅读时间
 const { reading_time, article_word_count } = remarkPluginFrontmatter;
 // 公共 Layout
