@@ -23,7 +23,11 @@ export default defineConfig({
 	adapter: cloudflare({
 		mode: 'directory'
 	}),
-	build: { assets: 'vh_static' },
+	build: { 
+		assets: 'vh_static',
+	},
+	compressHTML: false,
+	trailingSlash: 'always',
 	integrations: [swup({
 		theme: false,
 		animationClass: "vh-animation-",
@@ -49,6 +53,11 @@ export default defineConfig({
 		syntaxHighlight: 'shiki',
 		shikiConfig: { theme: 'github-light' },
 	},
-	vite: { resolve: { alias: { "@": path.resolve(__dirname, "./src") } } },
+	vite: { 
+		resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
+		build: {
+			minify: false,
+		}
+	},
 	server: { host: '0.0.0.0' }
 });
