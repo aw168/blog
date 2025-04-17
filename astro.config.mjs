@@ -61,8 +61,8 @@ export default defineConfig({
 		resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
 		build: {
 			minify: false,
-			// 配置正确的目标环境
-			target: 'es2019',
+			// 配置正确的目标环境，升级到es2022以支持顶级await
+			target: 'es2022',
 		},
 		// 添加Cloudflare构建配置
 		ssr: {
